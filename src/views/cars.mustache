@@ -1,0 +1,22 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+<body>
+  <h1>Car List</h1>
+    <ul>
+        {{#cars}}
+            <li>
+                <form method="POST" action="/car/{{_id}}">
+                    <input type="text" name="name" value="{{name}}" required>
+                    <input type="number" name="price" value="{{price}}" required>
+                    <input type="text" name="color" value="{{color}}" required>
+                     <input type="text" name="description" value="{{description}}" required>
+                    <input type="text" name="categoryName" value="{{category.name}}" required>
+                    <button type="submit">Update</button>
+                </form>
+            </li>
+        {{/cars}}
+    </ul>
+</body>
+</html>

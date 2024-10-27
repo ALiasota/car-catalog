@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - DB=mongodb://mongo:27017/car-catalog
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - car-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - car-network
+    command: ["mongod", "--logpath", "/dev/null", "--quiet"]
+    logging:
+      driver: "none"
+
+volumes:
+  mongo-data:
+
+networks:
+  car-network:
